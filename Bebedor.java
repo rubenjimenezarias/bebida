@@ -28,7 +28,7 @@ public class Bebedor
     public void beber(Cubata copa)
     {
         // incrementa el nivel al tomar la copa
-        if (limite > nivel + copa.cantidadAlcohol())
+        if (limite > nivel)
         {
             nivel = nivel + copa.cantidadAlcohol();
         }
@@ -43,7 +43,14 @@ public class Bebedor
      */
     public void nivelAlcohol()
     {
-         System.out.println("Estoy bebido " + nivel);
+        if (nivel > 0) 
+        {
+            System.out.println("Estoy bebido " + nivel);
+        }
+        else 
+        { 
+            System.out.println("No he bebido nada");
+        }
     }
     
      /**
@@ -51,14 +58,20 @@ public class Bebedor
      */
     public void pregunta(String pregunta)
     {
-        if(pregunta.length()%2 == 0)
-        {  
-            System.out.println("Si");
+        if (nivel > limite)
+        {
+            System.out.println("Te grito " + pregunta + " ,ehh pero te estoy gritando!!");
         }
         else
         {
-            System.out.println("Si");
+            if (pregunta.length()%2 == 0)
+            {  
+                System.out.println("Si");
+            }
+            else
+            {
+                System.out.println("No");
+            }
         }
-            
     }
 }

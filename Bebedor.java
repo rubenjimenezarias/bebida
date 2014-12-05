@@ -60,11 +60,11 @@ public class Bebedor
     {
         if (nivel > limite)
         {
-            System.out.println("Te grito " + pregunta + " ,ehh pero te estoy gritando!!");
+            System.out.println("Te grito " + pregunta.toUpperCase() + " ,ehh pero te estoy gritando!!");
         }
         else
         {
-            if (pregunta.length()%2 == 0)
+            if ((pregunta.length()%2) == 0)
             {  
                 System.out.println("Si");
             }

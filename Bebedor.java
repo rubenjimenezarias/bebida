@@ -116,6 +116,14 @@ public class Bebedor
             }
         }
     }
+    /**
+     * Metodo para revivir a la persona.
+     */
+    public void revivir()
+    {
+        muerto = false;
+        System.out.println("OHH MILAGRO esta persona vuelve a respirar");
+    }
     
     /**
      * Metodo para comprobar si esta muerto.

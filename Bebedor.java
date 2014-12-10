@@ -11,6 +11,12 @@ public class Bebedor
     private int limite;
     // nivel alcohol
     private int nivel;
+    //limite muerte
+    private int muerte;
+    // muerto o no.
+    private boolean muerto;
+    //rechazo
+    private boolean rechazo;
 
     /**
      * Constructor for objects of class Bebedor
@@ -20,6 +26,20 @@ public class Bebedor
         // initialise instance variables
         this.limite = limite;
         nivel = 0;
+        rechazo = true;
+    }
+    
+    /**
+     * Constructor for objects of class Bebedor Borracho
+     * NO RECHAZA LAS COPAS
+     */
+    public Bebedor(int limite, int muerte)
+    {
+        // initialise instance variables
+        this.limite = limite;
+        nivel = 0;
+        this.muerte = muerte;
+        rechazo = false;
     }
 
     /**
@@ -28,13 +48,25 @@ public class Bebedor
     public void beber(Cubata copa)
     {
         // incrementa el nivel al tomar la copa
-        if (limite > nivel)
-        {
-            nivel = nivel + copa.cantidadAlcohol();
+        if (rechazo == true){
+            if (limite > nivel)
+            {
+                nivel = nivel + copa.cantidadAlcohol();
+            }
+            else
+            {
+                System.out.println("No quiero mas copas estoy ya borracho");
+            }
         }
-        else
-        {
-            System.out.println("No quiero mas copas estoy ya borracho");
+        else {
+            nivel = nivel + copa.cantidadAlcohol();
+            if ( nivel > muerte && muerto==false ){
+                muerto = true;
+                System.out.println("ESTA PERSONA ACABA DE MORIR");
+            }
+            else {
+                estaMuerto();
+            }
         }
     }
     
@@ -43,13 +75,18 @@ public class Bebedor
      */
     public void nivelAlcohol()
     {
-        if (nivel > 0) 
-        {
-            System.out.println("Estoy bebido " + nivel);
+        if (muerto){
+            estaMuerto();
         }
-        else 
-        { 
-            System.out.println("No he bebido nada");
+        else {    
+            if (nivel > 0) 
+            {
+                System.out.println("Estoy bebido " + nivel);
+            }
+            else 
+            { 
+                System.out.println("No he bebido nada");
+            }
         }
     }
     
@@ -58,20 +95,35 @@ public class Bebedor
      */
     public void pregunta(String pregunta)
     {
-        if (nivel > limite)
-        {
-            System.out.println("Te grito " + pregunta.toUpperCase() + " ,ehh pero te estoy gritando!!");
+        if (muerto){
+            estaMuerto();
         }
-        else
-        {
-            if ((pregunta.length()%2) == 0)
-            {  
-                System.out.println("Si");
+        else {
+            if (nivel > limite)
+            {
+                System.out.println("Te grito " + pregunta.toUpperCase() + " ,ehh pero te estoy gritando!!");
             }
             else
             {
-                System.out.println("No");
+                if ((pregunta.length()%2) == 0)
+                {  
+                    System.out.println("Si");
+                }
+                else
+                {
+                    System.out.println("No");
+                }
             }
+        }
+    }
+    
+    /**
+     * Metodo para comprobar si esta muerto.
+     */
+    private void estaMuerto()
+    {
+        if (muerto){
+            System.out.println("ESTA PERSONA ESTA MUERTA");
         }
     }
 }
